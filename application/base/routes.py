@@ -8,13 +8,13 @@ from flask_login import (
     logout_user
 )
 
-from app import db, login_manager
-from app.base import blueprint
-from app.base.forms import LoginForm, CreateAccountForm
-from app.base.models import User, Car
+from application import db, login_manager
+from application.base import blueprint
+from application.base.forms import LoginForm, CreateAccountForm
+from application.base.models import User, Car
 
-from app.base.util import verify_pass
-# from app.helpers.mailer import *
+from application.base.util import verify_pass
+# from application.helpers.mailer import *
 
 
 @blueprint.route('/')

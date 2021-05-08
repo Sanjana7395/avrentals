@@ -15,7 +15,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     for module_name in ('base', 'home'):
-        module = import_module('app.{}.routes'.format(module_name))
+        module = import_module('application.{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
 
 def configure_database(app):
@@ -29,12 +29,12 @@ def configure_database(app):
         db.session.remove()
 
 def create_app(config):
-    app = Flask(__name__, static_folder='base/static')
+    application = Flask(__name__, static_folder='base/static')
     app = application
-    app.config.from_object(config)
-    register_extensions(app)
-    register_blueprints(app)
-    configure_database(app)
-    return app
+    application.config.from_object(config)
+    register_extensions(application)
+    register_blueprints(application)
+    configure_database(application)
+    return application
 
 

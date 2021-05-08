@@ -3,9 +3,9 @@
 from flask_login import UserMixin
 from sqlalchemy import Binary, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from app import db, login_manager
+from application import db, login_manager
 
-from app.base.util import hash_pass
+from application.base.util import hash_pass
 
 
 class User(db.Model, UserMixin):

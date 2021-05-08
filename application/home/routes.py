@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 
-from app.home import blueprint
+from application.home import blueprint
 from flask import render_template, redirect, url_for, request, session , send_file
 from flask_login import login_required, current_user
 
 from jinja2 import TemplateNotFound
-from app.home.forms import UpdateSettingsForm, DashboardForm
-from app.base.models import User, Car, Ride
-from app import db, login_manager
+from application.home.forms import UpdateSettingsForm, DashboardForm
+from application.base.models import User, Car, Ride
+from application import db, login_manager
 import os
 import random
-# from app.home.s3_demo import list_files, download_file, upload_file
+# from application.home.s3_demo import list_files, download_file, upload_file
 
 
 UPLOAD_FOLDER = "uploads"
