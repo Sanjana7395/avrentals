@@ -94,13 +94,13 @@ def transactions():
     # user_data = User.query.all()
     return render_template('transactions.html')
 
-# @blueprint.route('/storage')
-# @login_required
-# def storage():
-#     print("hello")
-#     #contents = list_files("avcloudbucket")
-#     contents = list_files("trailcloudupload")
-#     return render_template('storage.html', segment='index' , contents=contents)
+@blueprint.route('/storage')
+@login_required
+def storage():
+    print("hello")
+    #contents = list_files("avcloudbucket")
+    # contents = list_files("trailcloudupload")
+    return render_template('storage.html', segment='index' , contents=contents)
 
 # @blueprint.route("/upload", methods=['POST'])
 # def upload():

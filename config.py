@@ -18,6 +18,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(Config):
+    print("HI I am in production")
     DEBUG = False
 
     # Security
