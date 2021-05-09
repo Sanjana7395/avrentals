@@ -25,15 +25,17 @@
         </div>
     </div>
 </div>
-<div class="panel">
-    <div class="credit">
-        <div class="credit__owner">{{user.firstname}} {{user.lastname}}</div>
-        <div class="credit__number"> Available Amount</div>
-        <div class="credit_amount"> {{user.amount}} $</div>
-        <div class="mt-3_add_amount">
-            <button class="btn btn_add_amount">Add Amount</button>
+<div class="col-12 col-sm-6 col-xl-4 mb-4 mt-4">
+    <div class="card border-light shadow-sm">
+        <div class="card-body">
+            <div class="row d-block d-xl-flex align-items-center">
+                    <div class="d-none d-sm-block">
+                        <h2 class="h5">{{user.firstname}} {{user.lastname}}</h2>
+                        <h3 class="mb-1">Available Amount: $ {{user.amount}}</h3>
+                    </div>
+                    <button class="btn btn-dark">Add Amount</button>
+            </div>
         </div>
-
     </div>
 </div>
 <div class="table-settings mb-4">

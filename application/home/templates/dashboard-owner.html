@@ -7,17 +7,19 @@
 
 {% block content %}
 
-<div class="panel">
-    <div class="credit">
-        <div class="credit__owner">{{user.firstname}} {{user.lastname}}</div>
-        <div class="credit__number"> Available Amount</div>
-        <div class="credit_amount"> {{amount}} $</div>
-        <div class="mt-3_add_amount">
-            <button class="btn btn_add_amount">Transfer</button>
+  <div class="col-12 col-sm-6 col-xl-4 mb-4 mt-4">
+    <div class="card border-light shadow-sm">
+        <div class="card-body">
+            <div class="row d-block d-xl-flex align-items-center">
+                    <div class="d-none d-sm-block">
+                        <h2 class="h5">{{user.firstname}} {{user.lastname}}</h2>
+                        <h3 class="mb-1">Available Amount: $ {{amount}}</h3>
+                    </div>
+                    <button class="btn btn-dark">Transfer</button>
+            </div>
         </div>
-
     </div>
-  </div>
+</div>
 
       <div class="card border-light shadow-sm mb-4">
         <div class="card-header d-sm-flex flex-row align-items-center flex-0">
