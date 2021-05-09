@@ -8,9 +8,12 @@
 {% block content %}
 
 <div>
-    <a href="https://account.mongodb.com/account/login" 
+    <span><a href="https://account.mongodb.com/account/login" 
     class="btn btn-dark" type="button"
-    target="_blank" rel="noopener noreferrer">Access MongoDB</a>
+    target="_blank" rel="noopener noreferrer">Access GNSS Data</a></span>
+    <span><a href="https://220177423396.signin.aws.amazon.com/console" 
+        class="btn btn-dark" type="button"
+        target="_blank" rel="noopener noreferrer">Access Image Data</a></span>
 </div>
 <div class="card border-light shadow-sm mb-4 mt-4">
     <div class="card-header d-sm-flex flex-row align-items-center flex-0">
@@ -27,14 +30,14 @@
                         <th class="border-0">Car No</th>
                         <th class="border-0">Car Color</th>
                         <th class="border-0">Car Type</th>
-                        <th class="border-0">Car Active</th>
+                        <th class="border-0">Car Status</th>
                         <th class="border-0">Battery</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Item -->
 
-                    {% for row, num in zip(query, battery) %}
+                    {% for row, num in zip(query.items, battery) %}
                     <tr>
                         <td class="border-0 fw-bold">{{row.carmodel}}</td>
                         <td class="border-0">
@@ -47,7 +50,11 @@
                             {{row.cartype}}
                         </td>
                         <td class="border-0">
-                            {{row.active}}
+                            {% if row.active  == 'true'%}
+                                    Active
+                                  {% else %}
+                                    Inactive
+                                   {%endif%}
                         </td>
                         <td class="border-0">
                             <div class="row d-flex align-items-center">
@@ -67,6 +74,44 @@
                     <!-- End of Item -->
                 </tbody>
             </table>
+            <div class="card-footer" style="padding-bottom: 0px;">
+                <!-- Pagination Links-->
+                <div class="text-right">
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page=query.prev_num) }}" class="btn btn-outline-dark 
+                    {% if query.page == 1 %}disabled{% endif %}"
+                        style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+                        &laquo;
+                    </a>
+                    <!-- Loop through the number of pages to display a link for each-->
+                    {% for page_num in query.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)
+                    %}
+                    {% if page_num %}
+                    <!-- Check for the active page and set the link to "Active"-->
+                    {% if query.page == page_num %}
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page=page_num) }}" class="btn btn-dark"
+                        style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+                        {{ page_num }}
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page=page_num) }}" class="btn btn-outline-dark"
+                        style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+                        {{ page_num }}
+                    </a>
+                    {% endif %}
+                    {% else %}
+                    ...
+                    {% endif %}
+                    {% endfor %}
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page=query.next_num) }}" class="btn btn-outline-dark 
+       {% if query.page == query.pages %}disabled{% endif %}"
+                        style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+                        &raquo;
+                    </a>
+                </div>
+                <p class="text-right mt-3" style="font-size: 12px;">
+                    Showing page {{ query.page }} of {{ query.pages }}
+                </p>
+            </div>
         </div>
     </div>
 </div>
@@ -112,7 +157,7 @@
             <div class="card-footer" style="padding-bottom: 0px;">
                 <!-- Pagination Links-->
                 <div class="text-right">
-                    <a href="{{ url_for('home_blueprint.dashboardadmin', page=user_query.prev_num) }}" class="btn btn-outline-dark 
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page1=user_query.prev_num) }}" class="btn btn-outline-dark 
                     {% if user_query.page == 1 %}disabled{% endif %}"
                         style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
                         &laquo;
@@ -123,12 +168,12 @@
                     {% if page_num %}
                     <!-- Check for the active page and set the link to "Active"-->
                     {% if user_query.page == page_num %}
-                    <a href="{{ url_for('home_blueprint.dashboardadmin', page=page_num) }}" class="btn btn-dark"
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page1=page_num) }}" class="btn btn-dark"
                         style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
                         {{ page_num }}
                     </a>
                     {% else %}
-                    <a href="{{ url_for('home_blueprint.dashboardadmin', page=page_num) }}" class="btn btn-outline-dark"
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page1=page_num) }}" class="btn btn-outline-dark"
                         style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
                         {{ page_num }}
                     </a>
@@ -137,7 +182,7 @@
                     ...
                     {% endif %}
                     {% endfor %}
-                    <a href="{{ url_for('home_blueprint.dashboardadmin', page=user_query.next_num) }}" class="btn btn-outline-dark 
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page1=user_query.next_num) }}" class="btn btn-outline-dark 
        {% if user_query.page == user_query.pages %}disabled{% endif %}"
                         style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
                         &raquo;

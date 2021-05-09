@@ -57,7 +57,7 @@
 
 
         </li>
-        {%if current_user.role != 'owner'%}
+        {%if current_user.role == 'user'%}
           <li class="nav-item {% if '
             ' in segment %} active {% endif %}">
               <a href="{{ url_for('home_blueprint.transactions') }}" class="nav-link">

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from flask_login import UserMixin
-from sqlalchemy import Binary, Column, Integer, String, ForeignKey
+from sqlalchemy import Binary, Column, Integer, String, ForeignKey, Date
 from sqlalchemy.orm import relationship
 from application import db, login_manager
 
@@ -72,6 +72,8 @@ class Ride(db.Model):
     payment = Column(String)
     userId = Column(Integer)
     trip_status = Column(String)
+    ride_date = Column(Date)
+    est_amount = Column(Integer)
 
     def __repr__(self):
         return '<RideDetails: {}'.format(self.source)

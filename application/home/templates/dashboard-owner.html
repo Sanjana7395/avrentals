@@ -7,21 +7,22 @@
 
 {% block content %}
 
-  <div class="col-12 col-sm-6 col-xl-4 mb-4 mt-4">
-    <div class="card border-light shadow-sm">
+  <div style="text-align: center; margin: auto; width: 40%;">
+    <div class="card border-light shadow-sm" style="background-image: linear-gradient(380deg, #000000, #9f9f9f);
+     padding: 4%;">
         <div class="card-body">
             <div class="row d-block d-xl-flex align-items-center">
                     <div class="d-none d-sm-block">
-                        <h2 class="h5">{{user.firstname}} {{user.lastname}}</h2>
-                        <h3 class="mb-1">Available Amount: $ {{amount}}</h3>
+                        <h2 class="h5" style="color: white;">{{user.username}}</h2>
+                        <h3 class="mb-1" style="color: white;">Available Amount: $ {{amount}}</h3>
                     </div>
-                    <button class="btn btn-dark">Transfer</button>
+                    <button class="btn btn-white" style="margin-top: 5%;">Transfer</button>
             </div>
         </div>
     </div>
 </div>
 
-      <div class="card border-light shadow-sm mb-4">
+      <div class="card border-light shadow-sm mb-4 mt-4">
         <div class="card-header d-sm-flex flex-row align-items-center flex-0">
             <div class="d-block mb-3 mb-sm-0">
                 <div class="h5 fw-normal mb-2">Car Information</div>
@@ -101,6 +102,7 @@
                               <th class="border-0">#</th>
                               <th class="border-0">Source</th>
                               <th class="border-0">Destination</th>
+                              <th class="border-0">Date</th>
                               <th class="border-0">Trip Status</th>
                               <th class="border-0">Amount</th>
                           </tr>
@@ -120,8 +122,21 @@
                                   {{row.destination}}
                               </td>
                               <td class="border-0">
+                                {{row.ride_date}}
+                            </td>
+                            {% if row.trip_status == 'Complete' %}
+                              <td class="border-0" style="color: #15cb15;">
                                   {{row.trip_status}}
                               </td>
+                            {% elif row.trip_status == 'Cancelled' %}
+                              <td class="border-0" style="color: red;">
+                                  {{row.trip_status}}
+                              </td>
+                            {% else %}
+                              <td class="border-0" style="color: #ffb300;">
+                                  {{row.trip_status}}
+                              </td>
+                            {% endif %}
                                 <td class="border-0">
                                   {{row.payment}}
                               </td>

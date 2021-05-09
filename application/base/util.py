@@ -24,7 +24,7 @@ def verify_pass(provided_password, stored_password):
     pwdhash = binascii.hexlify(pwdhash).decode('ascii')
     print("hey")
     print(stored_password)
-    print(pwdhash)
-    #return pwdhash == stored_password
-    return True
+    print(pwdhash[:len(stored_password)])
+    return pwdhash[:len(stored_password)] == stored_password
+    # return True
 

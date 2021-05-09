@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 
-from flask import jsonify, render_template, redirect, request, url_for
+from flask import jsonify, render_template, redirect, request, url_for, session
 from flask_login import (
+    login_manager,
     current_user,
     login_required,
     login_user,
@@ -16,6 +17,7 @@ from application.base.models import User, Car
 from application.base.util import verify_pass
 # from application.helpers.mailer import *
 
+login_manager.session_protection = "strong"
 
 @blueprint.route('/')
 def route_default():
@@ -28,7 +30,7 @@ def route_default():
 def login():
     login_form = LoginForm(request.form)
     if 'login' in request.form:
-
+        session.permanent = False
         # read form data
         username = request.form['username']
         password = request.form['password']
@@ -101,9 +103,6 @@ def register():
             )
             db.session.add(car)
             db.session.commit()
-            # sendmail(subject="Registration for Flask Admin Boilerplate", sender="Flask Admin Boilerplate",
-            #          recipient=email, body="You successfully registered on Flask Admin Boilerplate")
-            # print("Done")
         return render_template('accounts/register.html',
                                msg='User created please <a href="/login">login</a>',
                                success=True,

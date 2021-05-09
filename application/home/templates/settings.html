@@ -7,13 +7,24 @@
 
 {% block content %}
 
-  <div class="row mt-4">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="d-block mb-4 mb-md-0">
+        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User Details</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+  <div class="row">
       <div class="col-12 col-xl-8">
           <div class="card card-body shadow-sm mb-4">
                <h2 class="h5 mb-4">Role </h2>
               <div class="col-md-6 mb-3">
                           <div class="form-group">
-                              <input class="form-control" placeholder={{ current_user.role }} readonly>
+                              <input class="form-control" style="text-transform:uppercase;" placeholder={{current_user.role}} readonly>
                           </div>
                       </div>
               <h2 class="h5 mb-4">General information</h2>
@@ -34,7 +45,6 @@
                       <div class="col-md-6 mb-3">
                           <div>
                               <label for="last_name">Last Name</label>
-<!--                              <input class="form-control" id="last_name" type="text" placeholder="Also your last name" required>-->
                               {{ form.lastname(placeholder="Last name",  class="form-control") }}
                           </div>
                       </div>
@@ -44,7 +54,6 @@
                           <label for="birthday">Birthday</label>
                           <div class="input-group">
                               <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
-<!--                              <input data-datepicker="" class="form-control" id="birthday" type="text" placeholder="dd/mm/yyyy" required>-->
                                {{ form.dob(placeholder="dd/mm/yyyy",  class="form-control") }}
                             </div>
                       </div>
@@ -57,13 +66,12 @@
                       <div class="col-md-6 mb-3">
                           <div class="form-group">
                               <label for="email">Email</label>
-                              <input class="form-control" id="email" type="email" placeholder={{ current_user.email }} required>
+                              <input class="form-control" id="email" type="email" placeholder={{current_user.email}} required>
                           </div>
                       </div>
                       <div class="col-md-6 mb-3">
                           <div class="form-group">
                               <label for="phone">Phone</label>
-<!--                              <input class="form-control" id="phone" type="number" placeholder="+12-345 678 910" required>-->
                                   {{ form.phonenumber(placeholder="+12-345 678 910",  class="form-control") }}
                           </div>
                       </div>
@@ -73,14 +81,12 @@
                       <div class="col-sm-9 mb-3">
                           <div class="form-group">
                               <label for="address">Address</label>
-<!--                              <input class="form-control" id="address" type="text" placeholder="Enter your home address" required>-->
                                  {{ form.address(placeholder="Enter your home address",  class="form-control") }}
                           </div>
                       </div>
                       <div class="col-sm-3 mb-3">
                           <div class="form-group">
                               <label for="number">Apartment Number</label>
-<!--                              <input class="form-control" id="number" type="number" placeholder="No." required>-->
                                    {{ form.houseno(placeholder="No.",  class="form-control") }}
                           </div>
                       </div>
@@ -89,14 +95,12 @@
                       <div class="col-sm-4 mb-3">
                           <div class="form-group">
                               <label for="city">City</label>
-<!--                              <input class="form-control" id="city" type="text" placeholder="City" required>-->
-                               {{ form.city(placeholder= "{{ current_user.city }}",  class="form-control") }}
+                               {{ form.city(placeholder= "Enter your city",  class="form-control") }}
                           </div>
                       </div>
                       <div class="col-sm-4">
                           <div class="form-group">
                               <label for="zip">ZIP</label>
-<!--                              <input class="form-control" id="zip" type="tel" placeholder="ZIP" required>-->
                                {{ form.zip(placeholder="ZIP",  class="form-control") }}
                           </div>
                       </div>
