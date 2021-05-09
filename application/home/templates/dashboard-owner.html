@@ -7,6 +7,18 @@
 
 {% block content %}
 
+<div class="panel">
+    <div class="credit">
+        <div class="credit__owner">{{user.firstname}} {{user.lastname}}</div>
+        <div class="credit__number"> Available Amount</div>
+        <div class="credit_amount"> {{amount}} $</div>
+        <div class="mt-3_add_amount">
+            <button class="btn btn_add_amount">Transfer</button>
+        </div>
+
+    </div>
+  </div>
+
       <div class="card border-light shadow-sm mb-4">
         <div class="card-header d-sm-flex flex-row align-items-center flex-0">
             <div class="d-block mb-3 mb-sm-0">
@@ -23,7 +35,7 @@
                               <th class="border-0">Car No</th>
                               <th class="border-0">Car Color</th>
                               <th class="border-0">Car Type</th>
-                              <th class="border-0">Car Active</th>
+                              <th class="border-0">Car Status</th>
                               <th class="border-0">Battery</th>
 <!--                              <th class="border-0">Change</th>-->
                           </tr>
@@ -46,7 +58,11 @@
                                   {{row.cartype}}
                               </td>
                                 <td class="border-0">
-                                  {{row.active}}
+                                    {% if row.active  == 'true'%}
+                                    Active
+                                  {% else %}
+                                    Inactive
+                                   {%endif%}
                               </td>
                               <td class="border-0">
                                   <div class="row d-flex align-items-center">
@@ -83,7 +99,7 @@
                               <th class="border-0">#</th>
                               <th class="border-0">Source</th>
                               <th class="border-0">Destination</th>
-                              <th class="border-0">Status</th>
+                              <th class="border-0">Trip Status</th>
                               <th class="border-0">Amount</th>
                           </tr>
                       </thead>
@@ -102,10 +118,10 @@
                                   {{row.destination}}
                               </td>
                               <td class="border-0">
-                                  Completed
+                                  {{row.trip_status}}
                               </td>
                                 <td class="border-0">
-                                  $70
+                                  {{row.payment}}
                               </td>
                           </tr>
                           {% endfor %}

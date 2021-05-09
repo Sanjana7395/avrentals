@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
     dob =  Column(String)
     gender =  Column(String)
     phonenumber =  Column(String)
+    amount  = Column(Integer)
     car = relationship('Car', backref='owner', lazy='dynamic', primaryjoin='User.id == Car.user_id')
 
     def __init__(self, **kwargs):
@@ -68,6 +69,9 @@ class Ride(db.Model):
     car_id = Column(Integer, ForeignKey('avrentalcars.id'))
     source = Column(String)
     destination = Column(String)
+    payment = Column(String)
+    userId = Column(Integer)
+    trip_status = Column(String)
 
     def __repr__(self):
         return '<RideDetails: {}'.format(self.source)

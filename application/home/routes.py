@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from application.home import blueprint
-from flask import render_template, redirect, url_for, request, session , send_file
+from flask import render_template, redirect, url_for, request, session , send_file, flash
 from flask_login import login_required, current_user
 
 from jinja2 import TemplateNotFound
@@ -23,17 +23,28 @@ def dashboard():
     if 'book' in request.form:
         cartype = request.form['cartype']
         car = Car.query.filter_by(cartype=cartype, active='false').first()
-        car.active = 'true'
-        print(request.form['source'])
-        print(request.form['destination'])
-        ride = Ride(
-                ride=car,
-                source=request.form['source'],
-                destination=request.form['destination'],
-            )
-        db.session.add(ride)
-        db.session.commit()
-        return render_template('dashboard.html', segment='dashboard', form=dashboard_form, car=car)
+        user = User.query.filter_by(username=current_user.username).first()
+        if(car != None):
+            car.active = 'true'
+            user_id = user.id
+			#We need user id to fetch user old transaction details.
+            print(request.form['source'])
+            print(request.form['destination'])
+            print("hello")
+            ride = Ride(
+					ride=car,
+					source=request.form['source'],
+					destination=request.form['destination'],
+					userId= user_id,
+					trip_status = "Booked",
+					payment = 0
+				)
+            db.session.add(ride)
+            db.session.commit()
+            return render_template('dashboard.html', segment='dashboard', form=dashboard_form, car=car)
+        else:
+            car_type = request.form['cartype']
+            return render_template('dashboard.html', segment='dashboard', form=dashboard_form, error = True, carType = car_type)
     else:    
         return render_template('dashboard.html', segment='dashboard', form=dashboard_form)
 
@@ -58,11 +69,15 @@ def dashboardadmin():
 def dashboardowner():
         data = Car.query.filter_by(user_id = current_user.id ).all()  # data from database
         carrides_owned = []
+        Amount = 0
         # page = request.args.get('page', 1, type=int)
         for i in data:
             rides = Ride.query.filter_by(car_id=i.id).all()
             carrides_owned.extend(rides)
-        return render_template('dashboard-owner.html', query=data, carrides=carrides_owned)
+
+        for i in carrides_owned:
+            Amount = Amount + i.payment
+        return render_template('dashboard-owner.html', query=data, carrides=carrides_owned, user=current_user, amount = Amount)
 
 
 @blueprint.route('/settings', methods=['GET', 'POST'])
@@ -90,9 +105,12 @@ def settings():
 @blueprint.route('/transactions', methods=['GET', 'POST'])
 @login_required
 def transactions():
-    # data = Car.query.all()  # data from database
-    # user_data = User.query.all()
-    return render_template('transactions.html')
+    data = Ride.query.filter_by(userId = current_user.id ).all()  # data from database
+    print("Getting Data ",current_user.firstname)
+
+	#user_data = User.query.filter_by(username=current_user.id).first()
+    
+    return render_template('transactions.html', tripRecord=data, count = len(data), user=current_user)
 
 @blueprint.route('/storage')
 @login_required
