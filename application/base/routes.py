@@ -15,7 +15,6 @@ from application.base.forms import LoginForm, CreateAccountForm
 from application.base.models import User, Car
 
 from application.base.util import verify_pass
-# from application.helpers.mailer import *
 
 login_manager.session_protection = "strong"
 
@@ -88,6 +87,7 @@ def register():
             password=request.form['password'],
             email=request.form['email'],
             role=request.form['role'],
+            amount=100,
         )
         db.session.add(user)
         db.session.commit()
@@ -104,7 +104,7 @@ def register():
             db.session.add(car)
             db.session.commit()
         return render_template('accounts/register.html',
-                               msg='User created please <a href="/login">login</a>',
+                               msg='User created Sucessfully.  <u><a href="/login">Please Login</a></u>',
                                success=True,
                                form=create_account_form)
 

@@ -13,11 +13,6 @@ from datetime import date
 import random
 import requests, json
 import re
-# from application.home.s3_demo import list_files, download_file, upload_file
-
-
-UPLOAD_FOLDER = "uploads"
-BUCKET = "trailcloudupload"
 
 @blueprint.route('/dashboard', methods=['GET', 'POST'])
 @login_required
@@ -111,7 +106,6 @@ def dashboardowner():
         data = Car.query.filter_by(user_id = current_user.id ).all()  # data from database
         carrides_owned = []
         Amount = 0
-        # page = request.args.get('page', 1, type=int)
         for i in data:
             rides = Ride.query.filter_by(car_id=i.id).all()
             carrides_owned.extend(rides)
@@ -129,7 +123,6 @@ def settings():
     if 'saveall' in request.form:
         user = User.query.filter_by(username=current_user.username).first()
         if user:
-            # print("Checking user")
             user.firstname = request.form['firstname']
             user.lastname = request.form['lastname']
             user.address = request.form['address']
@@ -148,7 +141,6 @@ def settings():
 def transactions():
     page = request.args.get('page2', 1, type=int)
     data = Ride.query.filter_by(userId = current_user.id ).paginate(page=page, per_page=5)  # data from database
-
 	#user_data = User.query.filter_by(username=current_user.id).first()
     
     return render_template('transactions.html', tripRecord=data, count = len(data.items), user=current_user)
@@ -157,7 +149,5 @@ def transactions():
 @login_required
 def storage():
     print("hello")
-    #contents = list_files("avcloudbucket")
-    # contents = list_files("trailcloudupload")
     return render_template('storage.html', segment='index' , contents=contents)
 

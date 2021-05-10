@@ -8,12 +8,10 @@
 {% block content %}
 
 <div>
-    <span><a href="https://account.mongodb.com/account/login" 
-    class="btn btn-dark" type="button"
-    target="_blank" rel="noopener noreferrer">Access GNSS Data</a></span>
-    <span><a href="https://220177423396.signin.aws.amazon.com/console" 
-        class="btn btn-dark" type="button"
-        target="_blank" rel="noopener noreferrer">Access Image Data</a></span>
+    <span><a href="https://account.mongodb.com/account/login" class="btn btn-dark" type="button" target="_blank"
+            rel="noopener noreferrer">Access Sensor Data</a></span>
+    <span><a href="https://220177423396.signin.aws.amazon.com/console" class="btn btn-dark" type="button"
+            target="_blank" rel="noopener noreferrer">Access Image Data</a></span>
 </div>
 <div class="card border-light shadow-sm mb-4 mt-4">
     <div class="card-header d-sm-flex flex-row align-items-center flex-0">
@@ -50,11 +48,11 @@
                             {{row.cartype}}
                         </td>
                         <td class="border-0">
-                            {% if row.active  == 'true'%}
-                                    Active
-                                  {% else %}
-                                    Inactive
-                                   {%endif%}
+                            {% if row.active == 'true'%}
+                            Active
+                            {% else %}
+                            Inactive
+                            {%endif%}
                         </td>
                         <td class="border-0">
                             <div class="row d-flex align-items-center">
@@ -78,8 +76,7 @@
                 <!-- Pagination Links-->
                 <div class="text-right">
                     <a href="{{ url_for('home_blueprint.dashboardadmin', page=query.prev_num) }}" class="btn btn-outline-dark 
-                    {% if query.page == 1 %}disabled{% endif %}"
-                        style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+                    {% if query.page == 1 %}disabled{% endif %}" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
                         &laquo;
                     </a>
                     <!-- Loop through the number of pages to display a link for each-->
@@ -103,8 +100,7 @@
                     {% endif %}
                     {% endfor %}
                     <a href="{{ url_for('home_blueprint.dashboardadmin', page=query.next_num) }}" class="btn btn-outline-dark 
-       {% if query.page == query.pages %}disabled{% endif %}"
-                        style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+       {% if query.page == query.pages %}disabled{% endif %}" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
                         &raquo;
                     </a>
                 </div>
@@ -173,8 +169,8 @@
                         {{ page_num }}
                     </a>
                     {% else %}
-                    <a href="{{ url_for('home_blueprint.dashboardadmin', page1=page_num) }}" class="btn btn-outline-dark"
-                        style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+                    <a href="{{ url_for('home_blueprint.dashboardadmin', page1=page_num) }}"
+                        class="btn btn-outline-dark" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
                         {{ page_num }}
                     </a>
                     {% endif %}
